@@ -1,7 +1,7 @@
-<h1 align="center">Kurimanju Battleship<h1>
-<p align="center" style="font-weight:normal;font-size:20px">Play an exciting game of battleship against everyone's friend Kurimanju Senpai!<p>
-
+<h1 align="center">Kurimanju Battleship</h1>
+<h3 align="center">Play an exciting game of battleship against everyone's friend Kurimanju Senpai!</h3>
 <!-- Insert project screenshot here! -->
+<h1></h1>
 
 ### Project for The Odin Project: [Lesson link](https://www.theodinproject.com/lessons/node-path-javascript-battleship)
 
