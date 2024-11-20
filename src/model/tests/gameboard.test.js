@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { gameboard } from './../gameboard.js';
 
 describe('The gameboard object', () => {
@@ -37,5 +38,14 @@ describe('The gameboard object', () => {
         const board = gameboard();
         board.receiveHit(0, 0);
         expect(board.getCell(0, 0).isHit()).toBe(true);
+    });
+
+    test('Verify receiveHit calls hit on ship', () => {
+        const board = gameboard();
+        board.placeShip(0, 0, 1, true);
+        const ship = board.getCell(0, 0).getShip();
+        ship.hit = jest.fn();
+        board.receiveHit(0, 0);
+        expect(ship.hit).toBeCalledTimes(1);
     });
 });

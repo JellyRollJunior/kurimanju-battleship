@@ -61,9 +61,15 @@ const gameboard = () => {
     };
 
     const receiveHit = (x, y) => {
+        // return if cell index is invalid or cell already hit
         if (!isIndexValid(x, y, length)) return;
         const cell = getCell(x, y);
+        if (cell.isHit()) return;
+
         cell.hit();
+        if (cell.hasShip()) {
+            cell.getShip().hit();
+        }
     };
 
     const prettyPrintBoard = () => {
@@ -93,7 +99,3 @@ const gameboard = () => {
         prettyPrintBoard,
     };
 };
-
-const board = gameboard();
-board.placeShip(0, 1, 1);
-console.log('test');
