@@ -2,9 +2,9 @@ import { ship } from './ship.js';
 export { gameboard };
 
 const cell = () => {
-    const hitStatus = false;
+    let hitStatus = false;
     const isHit = () => hitStatus;
-    const hit = () => (hitStatus = true);
+    const hit = () => hitStatus = true;
 
     let ship = null;
     const getShip = () => ship;
@@ -38,5 +38,11 @@ const gameboard = () => {
         }
     };
 
-    return { length, getBoard, placeShip };
+    const receiveHit = (x, y) => {
+        if (!isIndexValid(x, y, length)) return;
+        const cell = board[y][x];
+        cell.hit();
+    };
+
+    return { length, getBoard, placeShip, receiveHit };
 };

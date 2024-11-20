@@ -22,4 +22,10 @@ describe('The gameboard object', () => {
         const board = gameboard();
         expect(() => board.placeShip(50, 0, 1)).not.toThrow(Error);
     })
+
+    test('Verify receiveHit sets cell hitStatus to true', () => {
+        const board = gameboard();
+        board.receiveHit(0, 0);
+        expect(board.getBoard()[0][0].isHit()).toBe(true);
+    })
 });
