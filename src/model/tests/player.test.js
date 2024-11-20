@@ -5,4 +5,14 @@ describe('The player object', () => {
         const playerOne = player();
         expect(playerOne).not.toBeUndefined();
     })
+
+    test('Verify can create human player', () => {
+        const playerOne = player(true);
+        expect(playerOne.isHuman).toBe(true);
+    })
+
+    test('Verify can create non human player', () => {
+        const playerOne = player(false);
+        expect(playerOne.isHuman).toBe(false);
+    })
 })

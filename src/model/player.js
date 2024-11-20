@@ -1,5 +1,7 @@
 export { player };
 
-const player = () => {
-    return {};
+const player = (isHuman = true) => {
+    const isHumanPlayer = isHuman;
+
+    return { isHuman : isHumanPlayer };
 };
