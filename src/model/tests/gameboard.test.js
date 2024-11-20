@@ -48,4 +48,17 @@ describe('The gameboard object', () => {
         board.receiveHit(0, 0);
         expect(ship.hit).toBeCalledTimes(1);
     });
+
+    test('Verify areAllSunk returns false if total ship health > 0', () => {
+        const board = gameboard();
+        board.placeShip(0, 0, 1, true);
+        expect(board.areAllSunk()).toBe(false);
+    });
+
+    test('Verify areAllSunk returns true if total ship health <= 0', () => {
+        const board = gameboard();
+        board.placeShip(0, 0, 1, true);
+        board.receiveHit(0, 0);
+        expect(board.areAllSunk()).toBe(true);
+    });
 });

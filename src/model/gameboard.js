@@ -72,6 +72,19 @@ const gameboard = () => {
         }
     };
 
+    const areAllSunk = () => {
+        let sunk = false;
+        const board = getBoard();
+        board.forEach((row) => {
+            row.forEach((cell) => {
+                if (cell.hasShip()) {
+                    sunk = sunk || cell.getShip().getHealth() <= 0;
+                }
+            });
+        });
+        return sunk;
+    };
+
     const prettyPrintBoard = () => {
         console.log('Gameboard:');
         console.log('=================');
@@ -96,6 +109,7 @@ const gameboard = () => {
         getCell,
         placeShip,
         receiveHit,
+        areAllSunk,
         prettyPrintBoard,
     };
 };
