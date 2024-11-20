@@ -1,21 +1,24 @@
-import { ship } from './ship.js'
+import { ship } from './ship.js';
 export { gameboard };
 
 const cell = () => {
     const hitStatus = false;
     const isHit = () => hitStatus;
-    const hit = () => hitStatus = true;
+    const hit = () => (hitStatus = true);
 
     let ship = null;
     const getShip = () => ship;
-    const setShip = (battleship) => ship = battleship;
-    const hasShip = () => ship == null ? false : true;
+    const setShip = (battleship) => (ship = battleship);
+    const hasShip = () => (ship == null ? false : true);
 
-    return { isHit, hit, hasShip, setShip, getShip }
-}
+    return { isHit, hit, hasShip, setShip, getShip };
+};
 
 const gameboard = () => {
     const length = 10;
+    const isIndexValid = (x, y, length) => {
+        return x >= 0 && x <= length - 1 && y >= 0 && y <= length - 1;
+    };
 
     const createBoard = (length) => {
         const newBoard = [];
@@ -27,11 +30,13 @@ const gameboard = () => {
     let board = createBoard(length);
     const getBoard = () => board;
 
-    const placeShip = (x, y, length) => {
-        const cell = board[y][x];
-        const newShip = ship(length);
-        cell.setShip(newShip);
-    }
+    const placeShip = (x, y, shipLength) => {
+        if (isIndexValid(x, y, length)) {
+            const cell = board[y][x];
+            const newShip = ship(shipLength);
+            cell.setShip(newShip);
+        }
+    };
 
     return { length, getBoard, placeShip };
 };

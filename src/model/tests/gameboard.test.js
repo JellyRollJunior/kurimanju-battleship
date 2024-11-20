@@ -17,4 +17,9 @@ describe('The gameboard object', () => {
         board.placeShip(0, 1, 1);
         expect(board.getBoard()[1][0].hasShip()).toBe(true);
     })
+
+    test('Verify placeShip has index validation', () => {
+        const board = gameboard();
+        expect(() => board.placeShip(50, 0, 1)).not.toThrow(Error);
+    })
 });
