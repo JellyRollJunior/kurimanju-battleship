@@ -2,10 +2,11 @@
   "name": "kurimanju-battleship",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",  
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch src/*.js",
+    "watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch *.test.js",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --config webpack.dev.js",
     "deploy": "git subtree push --prefix dist origin gh-pages"
@@ -14,7 +15,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "@eslint/js": "^9.11.1",
+    "babel-jest": "^29.7.0",
     "css-loader": "^7.1.2",
     "eslint": "^9.11.1",
     "globals": "^15.9.0",
