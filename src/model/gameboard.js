@@ -51,10 +51,10 @@ const gameboard = () => {
         const newShip = ship(shipLength);
         for (let i = 0; i < shipLength; i++) {
             if (isVertical) {
-                const cell = board[y + i][x];
+                const cell = getCell(x, y + i);
                 cell.setShip(newShip);
             } else {
-                const cell = board[y][x + i];
+                const cell = getCell(x + i, y);
                 cell.setShip(newShip);
             }
         }
@@ -62,7 +62,7 @@ const gameboard = () => {
 
     const receiveHit = (x, y) => {
         if (!isIndexValid(x, y, length)) return;
-        const cell = board[y][x];
+        const cell = getCell(x, y);
         cell.hit();
     };
 
@@ -81,10 +81,17 @@ const gameboard = () => {
                 }
             });
             console.log(rowString);
-        })
-    }
+        });
+    };
 
-    return { length, getBoard, getCell, placeShip, receiveHit, prettyPrintBoard };
+    return {
+        length,
+        getBoard,
+        getCell,
+        placeShip,
+        receiveHit,
+        prettyPrintBoard,
+    };
 };
 
 const board = gameboard();
