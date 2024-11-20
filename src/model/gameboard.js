@@ -4,7 +4,7 @@ export { gameboard };
 const cell = () => {
     let hitStatus = false;
     const isHit = () => hitStatus;
-    const hit = () => hitStatus = true;
+    const hit = () => (hitStatus = true);
 
     let ship = null;
     const getShip = () => ship;
@@ -16,8 +16,19 @@ const cell = () => {
 
 const gameboard = () => {
     const length = 10;
-    const isIndexValid = (x, y, length) => {
-        return x >= 0 && x <= length - 1 && y >= 0 && y <= length - 1;
+    const isIndexValid = (x, y, maxLength) => {
+        return x >= 0 && x < maxLength && y >= 0 && y < maxLength;
+    };
+    const areIndicesValid = (x, y, span, isVertical = true) => {
+        let valid = true;
+        for (let i = 0; i < span; i++) {
+            if (isVertical) {
+                valid = valid && isIndexValid(x, y + i, length);
+            } else {
+                valid = valid && isIndexValid(x + i, y, length);
+            }
+        }
+        return valid;
     };
 
     const createBoard = (length) => {
@@ -30,11 +41,17 @@ const gameboard = () => {
     let board = createBoard(length);
     const getBoard = () => board;
 
-    const placeShip = (x, y, shipLength) => {
-        if (isIndexValid(x, y, length)) {
-            const cell = board[y][x];
-            const newShip = ship(shipLength);
-            cell.setShip(newShip);
+    const placeShip = (x, y, shipLength, isVertical = true) => {
+        if (!areIndicesValid(x, y, shipLength, isVertical)) return;
+        const newShip = ship(shipLength);
+        for (let i = 0; i < shipLength; i++) {
+            if (isVertical) {
+                const cell = board[y + i][x];
+                cell.setShip(newShip);
+            } else {
+                const cell = board[y][x + i];
+                cell.setShip(newShip);
+            }
         }
     };
 

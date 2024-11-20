@@ -18,6 +18,14 @@ describe('The gameboard object', () => {
         expect(board.getBoard()[1][0].hasShip()).toBe(true);
     })
 
+    test('Verify can place ship of length 2', () => {
+        const board = gameboard();
+        board.placeShip(0, 0, 2, true);
+        const shipReferenceOne = board.getBoard()[0][0].getShip();
+        const shipReferenceTwo = board.getBoard()[1][0].getShip();
+        expect(shipReferenceOne).toBe(shipReferenceTwo);
+    })
+
     test('Verify placeShip has index validation', () => {
         const board = gameboard();
         expect(() => board.placeShip(50, 0, 1)).not.toThrow(Error);
