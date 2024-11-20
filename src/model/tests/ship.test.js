@@ -17,4 +17,13 @@ describe('The ship object', () => {
         battleship.hit();
         expect(battleship.getHealth()).toBe(length - 1);
     });
+
+    test('Verify ship has sunk', () => {
+        const length = 4;
+        const battleship = ship(length);
+        for (let i = 0; i < length; i++) {
+            battleship.hit();
+        }
+        expect(battleship.isSunk()).toBe(true);
+    });
 });

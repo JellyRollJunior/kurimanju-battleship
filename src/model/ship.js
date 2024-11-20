@@ -5,7 +5,9 @@ const ship = (length = 1) => {
     const getHealth = () => health;
     const hit = () => {
         health -= 1;
-    }
+    };
 
-    return { length, getHealth, hit,};
+    const isSunk = () => health <= 0 ? true : false;
+
+    return { length, getHealth, hit, isSunk};
 };
