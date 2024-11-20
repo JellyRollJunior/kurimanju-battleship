@@ -34,12 +34,17 @@ const gameboard = () => {
     const createBoard = (length) => {
         const newBoard = [];
         for (let i = 0; i < length; i++) {
-            newBoard.push(Array(length).fill(cell()));
+            const row = [];
+            for (let j = 0; j < length; j++) {
+                row.push(cell());
+            }
+            newBoard.push(row);
         }
         return newBoard;
     };
     let board = createBoard(length);
     const getBoard = () => board;
+    const getCell = (x, y) => board[y][x];
 
     const placeShip = (x, y, shipLength, isVertical = true) => {
         if (!areIndicesValid(x, y, shipLength, isVertical)) return;
@@ -61,5 +66,27 @@ const gameboard = () => {
         cell.hit();
     };
 
-    return { length, getBoard, placeShip, receiveHit };
+    const prettyPrintBoard = () => {
+        console.log('Gameboard:');
+        console.log('=================');
+        board.forEach((row) => {
+            let rowString = '';
+            row.forEach((cell) => {
+                if (cell.hasShip()) {
+                    rowString += ' S';
+                } else if (cell.isHit()) {
+                    rowString += ' X';
+                } else {
+                    rowString += ' o';
+                }
+            });
+            console.log(rowString);
+        })
+    }
+
+    return { length, getBoard, getCell, placeShip, receiveHit, prettyPrintBoard };
 };
+
+const board = gameboard();
+board.placeShip(0, 1, 1);
+console.log('test');

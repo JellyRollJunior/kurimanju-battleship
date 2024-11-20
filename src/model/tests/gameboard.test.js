@@ -16,6 +16,7 @@ describe('The gameboard object', () => {
         const board = gameboard();
         board.placeShip(0, 1, 1);
         expect(board.getBoard()[1][0].hasShip()).toBe(true);
+        expect(board.getBoard()[1][0].hasShip()).toBe(true);
     })
 
     test('Verify can place ship of length 2', () => {
@@ -29,6 +30,7 @@ describe('The gameboard object', () => {
     test('Verify placeShip has index validation', () => {
         const board = gameboard();
         expect(() => board.placeShip(50, 0, 1)).not.toThrow(Error);
+        expect(() => board.placeShip(0, 0, 60)).not.toThrow(Error);
     })
 
     test('Verify receiveHit sets cell hitStatus to true', () => {
