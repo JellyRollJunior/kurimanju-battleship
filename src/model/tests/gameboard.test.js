@@ -11,4 +11,10 @@ describe('The gameboard object', () => {
         expect(board.getBoard().length).toStrictEqual(board.length);
         expect(board.getBoard()[0].length).toStrictEqual(board.length);
     });
+
+    test('Verify can place ships length 1', () => {
+        const board = gameboard();
+        board.placeShip(0, 1, 1);
+        expect(board.getBoard()[1][0].hasShip()).toBe(true);
+    })
 });
