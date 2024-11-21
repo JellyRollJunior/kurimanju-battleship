@@ -8,12 +8,19 @@ const createTableData = (text, x, y) => {
     return td;
 };
 
-const getBoardToken = (cell) => {
+const getPlayerBoardToken = (cell) => {
     if (cell.hasShip()) {
+        if (cell.isHit()) {
+            // cell hit and has ship
+            return 'Ꞩ';
+        }
+        // cell has a ship
         return 'S';
     } else if (cell.isHit()) {
+        // cell hit and vacant
         return 'X';
     } else {
+        // cell unhit
         return 'O';
     }
 };
@@ -47,7 +54,7 @@ const renderBoard = (boardElement, board) => {
     board.forEach((row, rowIndex) => {
         const tableRow = boardElement.querySelector(`tr[data-row="${rowIndex}"]`);
         row.forEach((cell, colIndex) => {
-            const td = createTableData(getBoardToken(cell), colIndex, rowIndex);
+            const td = createTableData(getPlayerBoardToken(cell), colIndex, rowIndex);
             tableRow.appendChild(td);
         })
     })
