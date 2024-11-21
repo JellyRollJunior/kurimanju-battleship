@@ -2,7 +2,6 @@ import { player } from './../model/player.js';
 export { controller };
 
 const controller = () => {
-
     const init = () => {
         // init boards and place ships on board
         const playerOne = player(true);
@@ -16,6 +15,6 @@ const controller = () => {
         playerTwo.board.placeShip(1, 0, 2, false);
         playerTwo.board.prettyPrintBoard();
     };
-    
+
     return { init };
 };
