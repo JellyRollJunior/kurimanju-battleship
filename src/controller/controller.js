@@ -16,4 +16,5 @@ const init = () => {
     playerTwo.board.prettyPrintBoard();
 
     renderPlayerOneBoard(playerOne.board.getBoard());
+    renderPlayerTwoBoard(playerTwo.board.getBoard());
 };

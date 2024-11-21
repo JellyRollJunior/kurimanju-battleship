@@ -1,4 +1,4 @@
-export { renderPlayerOneBoard };
+export { renderPlayerOneBoard, renderPlayerTwoBoard };
 
 const createTableData = (text) => {
     const td = document.createElement('td');
@@ -55,3 +55,8 @@ const renderPlayerOneBoard = (board) => {
     const holder = document.querySelector('#player-one-board');
     renderBoard(holder, board);
 };
+
+const renderPlayerTwoBoard = (board) => {
+    const holder = document.querySelector('#player-two-board');
+    renderBoard(holder, board);
+}
