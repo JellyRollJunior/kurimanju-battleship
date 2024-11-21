@@ -1,5 +1,5 @@
 import { player } from './../model/player.js';
-import { renderPlayerOneBoard } from './../view/view.js';
+import { renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
 const init = () => {
@@ -12,7 +12,7 @@ const init = () => {
     playerOne.board.prettyPrintBoard();
 
     playerTwo.board.placeShip(0, 0, 2, true);
-    playerTwo.board.placeShip(1, 0, 2, false);
+    playerTwo.board.placeShip(0, 3, 2, false);
     playerTwo.board.prettyPrintBoard();
 
     renderPlayerOneBoard(playerOne.board.getBoard());

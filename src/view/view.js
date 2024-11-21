@@ -39,15 +39,19 @@ const createHeaders = (length) => {
     return rows;
 };
 
-const renderPlayerOneBoard = (board) => {
-    const holder = document.querySelector('#player-one-board');
+const renderBoard = (boardElement, board) => {
     const headers = createHeaders(board.length);
-    headers.forEach((header) => holder.appendChild(header));
+    headers.forEach((header) => boardElement.appendChild(header));
     board.forEach((row, index) => {
-        const tableRow = document.querySelector(`tr.row-${index}`);
+        const tableRow = boardElement.querySelector(`tr.row-${index}`);
         row.forEach((cell) => {
             const td = createTableData(getBoardToken(cell));
             tableRow.appendChild(td);
         })
     })
+}
+
+const renderPlayerOneBoard = (board) => {
+    const holder = document.querySelector('#player-one-board');
+    renderBoard(holder, board);
 };
