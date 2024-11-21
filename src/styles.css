@@ -58,3 +58,21 @@ body {
   height: 105%;
   width: 1px;
 }
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td, th {
+  text-align: center;
+
+  --td-size: 33px;
+  height: var(--td-size);
+  width: var(--td-size);
+  margin: 0;
+}
+
+td {
+  border: 1px solid black;
+}
