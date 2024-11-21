@@ -2,6 +2,17 @@ import { player } from './../model/player.js';
 import { renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
+const handleBoardClick = () => {
+    const playerOneBoard = document.querySelector('#player-one-board');
+    playerOneBoard.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.tagName == 'TD') {
+            console.log(`col: ${target.dataset.column}`);
+            console.log(`row: ${target.dataset.row}`);
+        }
+    })
+}
+
 const init = () => {
     // init boards and place ships on board
     const playerOne = player(true);
@@ -28,4 +39,7 @@ const init = () => {
     // render board
     renderPlayerOneBoard(playerOne.board.getBoard());
     renderPlayerTwoBoard(playerTwo.board.getBoard());
+
+    // event handlers
+    handleBoardClick();
 };
