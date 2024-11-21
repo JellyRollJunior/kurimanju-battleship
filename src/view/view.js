@@ -1,8 +1,10 @@
 export { renderPlayerOneBoard, renderPlayerTwoBoard };
 
-const createTableData = (text) => {
+const createTableData = (text, x, y) => {
     const td = document.createElement('td');
     td.textContent = text;
+    td.dataset.row = y;
+    td.dataset.column = x;
     return td;
 };
 
@@ -30,7 +32,7 @@ const createHeaders = (length) => {
     // create left headers
     for (let i = 0; i < length; i++) {
         const tableRow = document.createElement('tr');
-        tableRow.classList.add(`row-${i}`);
+        tableRow.dataset.row = i;
         const headerItem = document.createElement('th');
         headerItem.textContent = i;
         tableRow.appendChild(headerItem)
@@ -42,10 +44,10 @@ const createHeaders = (length) => {
 const renderBoard = (boardElement, board) => {
     const headers = createHeaders(board.length);
     headers.forEach((header) => boardElement.appendChild(header));
-    board.forEach((row, index) => {
-        const tableRow = boardElement.querySelector(`tr.row-${index}`);
-        row.forEach((cell) => {
-            const td = createTableData(getBoardToken(cell));
+    board.forEach((row, rowIndex) => {
+        const tableRow = boardElement.querySelector(`tr[data-row="${rowIndex}"]`);
+        row.forEach((cell, colIndex) => {
+            const td = createTableData(getBoardToken(cell), colIndex, rowIndex);
             tableRow.appendChild(td);
         })
     })
