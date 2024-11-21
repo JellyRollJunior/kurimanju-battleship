@@ -46,5 +46,15 @@ body {
 
 .playing-area {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 50px 1fr;
+
+  margin-top: 24px;
+}
+
+.separator {
+  border-left: 3px solid black;
+  height: 105%;
+  width: 1px;
 }
