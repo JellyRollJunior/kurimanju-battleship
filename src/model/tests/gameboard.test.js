@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { expect, jest } from '@jest/globals';
 import { gameboard } from './../gameboard.js';
 
 describe('The gameboard object', () => {
@@ -32,6 +32,17 @@ describe('The gameboard object', () => {
         const board = gameboard();
         expect(() => board.placeShip(50, 0, 1)).not.toThrow(Error);
         expect(() => board.placeShip(0, 0, 60)).not.toThrow(Error);
+    });
+
+    test('Verify placeShip does not place ship ontop of ship', () => {
+        const board = gameboard();
+        // attempt to place ships on top of each other
+        // S O
+        // S S
+        // ^ this square has overlapping ship 1 and 2
+        board.placeShip(0, 0, 2, true);
+        expect(board.placeShip(0, 1, 2, false)).toBe(false);
+        expect(board.getCell(1, 1).hasShip()).toBe(false);
     });
 
     test('Verify receiveHit sets cell hitStatus to true', () => {

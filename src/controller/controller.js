@@ -18,8 +18,3 @@ const init = () => {
     renderPlayerOneBoard(playerOne.board.getBoard());
     renderPlayerTwoBoard(playerTwo.board.getBoard());
 };
-
-// todo make placeship ret true or false if wrong
-// bug: placeship will place on top of another ship it seems
-// playerTwo.board.placeShip(0, 0, 2, true);
-// playerTwo.board.placeShip(0, 1, 2, false);

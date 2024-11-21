@@ -14,18 +14,25 @@ const cell = () => {
     return { isHit, hit, hasShip, setShip, getShip };
 };
 
+// change isIndexValid -> isIndexInBoard
+// add isIndexVacant -> check if the space has a ship
+
 const gameboard = () => {
     const length = 10;
-    const isIndexValid = (x, y, maxLength) => {
+    const isIndexInBoard = (x, y, maxLength) => {
         return x >= 0 && x < maxLength && y >= 0 && y < maxLength;
     };
+    const isIndexVacant = (x, y) => {
+        const cell = getCell(x, y);
+        return !cell.hasShip();
+    }
     const areIndicesValid = (x, y, span, isVertical = true) => {
         let valid = true;
         for (let i = 0; i < span; i++) {
             if (isVertical) {
-                valid = valid && isIndexValid(x, y + i, length);
+                valid = valid && isIndexInBoard(x, y + i, length) && isIndexVacant(x, y);
             } else {
-                valid = valid && isIndexValid(x + i, y, length);
+                valid = valid && isIndexInBoard(x + i, y, length) && isIndexVacant(x, y);
             }
         }
         return valid;
@@ -47,7 +54,7 @@ const gameboard = () => {
     const getCell = (x, y) => board[y][x];
 
     const placeShip = (x, y, shipLength, isVertical = true) => {
-        if (!areIndicesValid(x, y, shipLength, isVertical)) return;
+        if (!areIndicesValid(x, y, shipLength, isVertical)) return false;
         const newShip = ship(shipLength);
         for (let i = 0; i < shipLength; i++) {
             if (isVertical) {
@@ -58,11 +65,12 @@ const gameboard = () => {
                 cell.setShip(newShip);
             }
         }
+        return true;
     };
 
     const receiveHit = (x, y) => {
         // return if cell index is invalid or cell already hit
-        if (!isIndexValid(x, y, length)) return;
+        if (!isIndexInBoard(x, y, length)) return;
         const cell = getCell(x, y);
         if (cell.isHit()) return;
 
@@ -114,3 +122,8 @@ const gameboard = () => {
         prettyPrintBoard,
     };
 };
+
+// todo make placeship ret true or false if wrong
+// bug: placeship will place on top of another ship it seems
+// playerTwo.board.placeShip(0, 0, 2, true);
+// playerTwo.board.placeShip(0, 1, 2, false);
