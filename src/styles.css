@@ -54,9 +54,11 @@ body {
 }
 
 .separator {
-  border-left: 3px solid black;
   height: 105%;
   width: 1px;
+  margin-top: 10px;
+  margin-left: 17px;
+  border-left: 3px solid black;
 }
 
 table {
