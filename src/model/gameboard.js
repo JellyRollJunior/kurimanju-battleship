@@ -87,7 +87,7 @@ const gameboard = () => {
 
     const prettyPrintBoard = () => {
         console.log('Gameboard:');
-        console.log('=================');
+        console.log('=====================');
         board.forEach((row) => {
             let rowString = '';
             row.forEach((cell) => {
@@ -96,11 +96,12 @@ const gameboard = () => {
                 } else if (cell.isHit()) {
                     rowString += ' X';
                 } else {
-                    rowString += ' o';
+                    rowString += ' O';
                 }
             });
             console.log(rowString);
         });
+        console.log('=====================');
     };
 
     return {
