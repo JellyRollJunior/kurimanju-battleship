@@ -1,3 +1,4 @@
+import { expect, jest } from '@jest/globals';
 import { gameController } from '../game-controller.js';
 
 describe('The battleship object', () => {
@@ -14,6 +15,13 @@ describe('The battleship object', () => {
 
     test('Verify game returns active player', () => {
         const game = gameController();
-        expect(game.getActivePlayer()).toBe(game.getPlayer());
+        expect(game.getDefendingPlayer()).toBe(game.getRival());
+    })
+
+    test('Verify playRound will call receiveHit on defending player', () => {
+        const game = gameController();
+        game.getRival().getBoard().receiveHit = jest.fn();
+        game.playRound(0, 0);
+        expect(game.getRival().getBoard().receiveHit).toBeCalledTimes(1);
     })
 });

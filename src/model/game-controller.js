@@ -1,4 +1,4 @@
-import { gameboard } from './gameboard.js'
+import { gameboard } from './gameboard.js';
 export { gameController };
 
 const gameController = () => {
@@ -7,15 +7,20 @@ const gameController = () => {
     const getPlayer = () => player;
     const getRival = () => rival;
 
-    let activePlayer = getPlayer();
-    const toggleActivePlayer = () => {
-        if (activePlayer == getPlayer()) {
-            activePlayer = getRival();
+    // active player receives attack
+    let defendingPlayer = getRival();
+    const toggleDefendingPlayer = () => {
+        if (defendingPlayer == getPlayer()) {
+            defendingPlayer = getRival();
         } else {
-            activePlayer = getPlayer();
+            defendingPlayer = getPlayer();
         }
-    }
-    const getActivePlayer = () => activePlayer;
+    };
+    const getDefendingPlayer = () => defendingPlayer;
 
-    return { getPlayer, getRival, getActivePlayer };
+    const playRound = (x, y) => {
+        getDefendingPlayer().getBoard().receiveHit(x, y);
+    }
+
+    return { getPlayer, getRival, getDefendingPlayer, playRound };
 };
