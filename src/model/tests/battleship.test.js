@@ -30,4 +30,11 @@ describe('The battleship object', () => {
         game.playRound(0, 0);
         expect(game.getDefendingPlayer()).toBe(game.getChallenger());
     })
+
+    test('Verify playRound will not swap defending player if attacker hit', () => {
+        const game = gameController();
+        game.getRival().board.placeShip(0, 0, 1, true);
+        game.playRound(0, 0);
+        expect(game.getDefendingPlayer()).toBe(game.getRival());
+    })
 });

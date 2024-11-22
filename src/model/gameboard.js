@@ -50,7 +50,7 @@ const gameboard = () => {
     const getBoard = () => board;
     const getCell = (x, y) => board[y][x];
 
-    const placeShip = (x, y, shipLength, isVertical = true) => {
+    const placeShip = (x, y, shipLength = 1, isVertical = true) => {
         if (!areIndicesValid(x, y, shipLength, isVertical)) return false;
         const newShip = ship(shipLength);
         for (let i = 0; i < shipLength; i++) {
