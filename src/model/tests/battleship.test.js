@@ -9,7 +9,7 @@ describe('The battleship object', () => {
 
     test('Verify game has two players', () => {
         const game = gameController();
-        expect(game.getPlayer()).not.toBeUndefined();
+        expect(game.getChallenger()).not.toBeUndefined();
         expect(game.getRival()).not.toBeUndefined();
     })
 
@@ -20,8 +20,14 @@ describe('The battleship object', () => {
 
     test('Verify playRound will call receiveHit on defending player', () => {
         const game = gameController();
-        game.getRival().getBoard().receiveHit = jest.fn();
+        game.getRival().board.receiveHit = jest.fn();
         game.playRound(0, 0);
-        expect(game.getRival().getBoard().receiveHit).toBeCalledTimes(1);
+        expect(game.getRival().board.receiveHit).toBeCalledTimes(1);
+    })
+
+    test('Verify playRound will swap defending player if attacker missed', () => {
+        const game = gameController();
+        game.playRound(0, 0);
+        expect(game.getDefendingPlayer()).toBe(game.getChallenger());
     })
 });

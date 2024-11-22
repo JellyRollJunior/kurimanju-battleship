@@ -14,9 +14,6 @@ const cell = () => {
     return { isHit, hit, hasShip, setShip, getShip };
 };
 
-// change isIndexValid -> isIndexInBoard
-// add isIndexVacant -> check if the space has a ship
-
 const gameboard = () => {
     const length = 10;
     const isIndexInBoard = (x, y, maxLength) => {
@@ -70,7 +67,7 @@ const gameboard = () => {
 
     const receiveHit = (x, y) => {
         // return if cell index is invalid or cell already hit
-        if (!isIndexInBoard(x, y, length)) return;
+        if (!isIndexInBoard(x, y, length)) return false;
         const cell = getCell(x, y);
         if (cell.isHit()) return;
 
@@ -78,6 +75,7 @@ const gameboard = () => {
         if (cell.hasShip()) {
             cell.getShip().hit();
         }
+        return true;
     };
 
     const areAllSunk = () => {
@@ -124,6 +122,3 @@ const gameboard = () => {
 };
 
 // todo make placeship ret true or false if wrong
-// bug: placeship will place on top of another ship it seems
-// playerTwo.board.placeShip(0, 0, 2, true);
-// playerTwo.board.placeShip(0, 1, 2, false);
