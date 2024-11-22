@@ -25,5 +25,27 @@ const gameController = () => {
         // case 2: hit -> keep player the same
     };
 
-    return { getChallenger, getRival, getDefendingPlayer, playRound };
+    const isGameOver = () => {
+        return (
+            getChallenger().board.areAllSunk() || getRival().board.areAllSunk()
+        );
+    };
+
+    const getWinner = () => {
+        if (isGameOver()) {
+            return getChallenger().board.areAllSunk()
+                ? getRival()
+                : getChallenger();
+        }
+        return null;
+    };
+
+    return {
+        getChallenger,
+        getRival,
+        getDefendingPlayer,
+        playRound,
+        isGameOver,
+        getWinner,
+    };
 };
