@@ -10,11 +10,8 @@ const gameController = () => {
     // active player receives attack
     let defendingPlayer = getRival();
     const toggleDefendingPlayer = () => {
-        if (defendingPlayer == getChallenger()) {
-            defendingPlayer = getRival();
-        } else {
-            defendingPlayer = getChallenger();
-        }
+        defendingPlayer =
+            defendingPlayer == getChallenger() ? getRival() : getChallenger();
     };
     const getDefendingPlayer = () => defendingPlayer;
 
@@ -26,7 +23,7 @@ const gameController = () => {
             toggleDefendingPlayer();
         }
         // case 2: hit -> keep player the same
-    }
+    };
 
     return { getChallenger, getRival, getDefendingPlayer, playRound };
 };
