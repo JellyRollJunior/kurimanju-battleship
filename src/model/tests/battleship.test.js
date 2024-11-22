@@ -11,4 +11,9 @@ describe('The battleship object', () => {
         expect(game.getPlayer()).not.toBeUndefined();
         expect(game.getRival()).not.toBeUndefined();
     })
+
+    test('Verify game returns active player', () => {
+        const game = gameController();
+        expect(game.getActivePlayer()).toBe(game.getPlayer());
+    })
 });

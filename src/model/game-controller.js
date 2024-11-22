@@ -7,5 +7,15 @@ const gameController = () => {
     const getPlayer = () => player;
     const getRival = () => rival;
 
-    return { getPlayer, getRival };
+    let activePlayer = getPlayer();
+    const toggleActivePlayer = () => {
+        if (activePlayer == getPlayer()) {
+            activePlayer = getRival();
+        } else {
+            activePlayer = getPlayer();
+        }
+    }
+    const getActivePlayer = () => activePlayer;
+
+    return { getPlayer, getRival, getActivePlayer };
 };
