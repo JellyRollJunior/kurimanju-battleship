@@ -22,14 +22,20 @@ const gameboard = () => {
     const isIndexVacant = (x, y) => {
         const cell = getCell(x, y);
         return !cell.hasShip();
-    }
+    };
     const areIndicesValid = (x, y, span, isVertical = true) => {
         let valid = true;
         for (let i = 0; i < span; i++) {
             if (isVertical) {
-                valid = valid && isIndexInBoard(x, y + i, length) && isIndexVacant(x, y);
+                valid =
+                    valid &&
+                    isIndexInBoard(x, y + i, length) &&
+                    isIndexVacant(x, y);
             } else {
-                valid = valid && isIndexInBoard(x + i, y, length) && isIndexVacant(x, y);
+                valid =
+                    valid &&
+                    isIndexInBoard(x + i, y, length) &&
+                    isIndexVacant(x, y);
             }
         }
         return valid;
@@ -91,6 +97,30 @@ const gameboard = () => {
         return sunk;
     };
 
+    const usePresetShipLayout = () => {
+        // Preset layout:
+        // =====================
+        //  S O O O O O O O O O
+        //  S O O O O S S O O O
+        //  O O O O O O O O O O
+        //  O O O S S S O O O O
+        //  O S O O O O O O O O
+        //  O S O O S O O O S O
+        //  O O O O O O O O S O
+        //  O O O S S S O O S O
+        //  O S O O O O O O S O
+        //  O O O O O O O O O O
+        // =====================
+        placeShip(1, 8, 1, false);
+        placeShip(4, 5, 1, true);
+        placeShip(0, 0, 2, true);
+        placeShip(5, 1, 2, false);
+        placeShip(1, 4, 2, true);
+        placeShip(3, 7, 3, false);
+        placeShip(3, 3, 3, false);
+        placeShip(8, 5, 4, true);
+    };
+
     const prettyPrintBoard = () => {
         console.log('Gameboard:');
         console.log('=====================');
@@ -117,8 +147,10 @@ const gameboard = () => {
         placeShip,
         receiveHit,
         areAllSunk,
+        usePresetShipLayout,
         prettyPrintBoard,
     };
 };
 
-// todo make placeship ret true or false if wrong
+const board = gameboard();
+board.usePresetShipLayout();

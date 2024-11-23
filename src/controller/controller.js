@@ -1,4 +1,4 @@
-import { player } from './../model/player.js';
+import { gameController } from '../model/game-controller.js';
 import { renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
@@ -14,31 +14,21 @@ const handleBoardClick = () => {
 }
 
 const init = () => {
-    // init boards and place ships on board
-    const playerOne = player(true);
-    const playerTwo = player(false);
+    // init game and place ships
+    const game = gameController();
+    game.getChallenger().board.usePresetShipLayout();
+    game.getRival().board.usePresetShipLayout();
 
-    // player one ships
-    playerOne.board.placeShip(0, 0, 2, true);
-    playerOne.board.placeShip(1, 0, 2, false);
-    playerOne.board.prettyPrintBoard();
-
-    // player two ships
-    playerTwo.board.placeShip(0, 0, 2, true);
-    playerTwo.board.placeShip(0, 3, 2, false);
-    playerTwo.board.prettyPrintBoard();
-
-    // player two received hits
-    playerTwo.board.receiveHit(0, 0);
-    playerTwo.board.receiveHit(0, 1);
-    playerTwo.board.receiveHit(0, 3);
-    playerTwo.board.receiveHit(3, 1);
-    playerTwo.board.receiveHit(1, 3);
-    console.log(playerTwo.board.areAllSunk());
+    // play game
+    game.playRound(0, 0);
+    game.playRound(0, 1);
+    game.playRound(0, 3);
+    game.playRound(3, 1);
+    game.playRound(1, 3);
 
     // render board
-    renderPlayerOneBoard(playerOne.board.getBoard());
-    renderPlayerTwoBoard(playerTwo.board.getBoard());
+    renderPlayerOneBoard(game.getChallenger().board.getBoard());
+    renderPlayerTwoBoard(game.getRival().board.getBoard());
 
     // event handlers
     handleBoardClick();

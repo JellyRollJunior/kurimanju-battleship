@@ -72,4 +72,19 @@ describe('The gameboard object', () => {
         board.receiveHit(0, 0);
         expect(board.areAllSunk()).toBe(true);
     });
+
+    test('Verify usePresetShipLayout places ships in predefined layout', () => {
+        const preset = gameboard();
+        preset.placeShip(1, 8, 1, false);
+        preset.placeShip(4, 5, 1, true);
+        preset.placeShip(0, 0, 2, true);
+        preset.placeShip(5, 1, 2, false);
+        preset.placeShip(1, 4, 2, true);
+        preset.placeShip(3, 7, 3, false);
+        preset.placeShip(3, 3, 3, false);
+        preset.placeShip(8, 5, 4, true);
+        const board = gameboard();
+        board.usePresetShipLayout();
+        expect(board.getBoard().toString()).toStrictEqual(preset.getBoard().toString());
+    })
 });
