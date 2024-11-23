@@ -20,4 +20,16 @@ describe('The player object', () => {
         const playerOne = player(true);
         expect(() => playerOne.board.getBoard()).not.toThrowError(Error);
     });
+
+    test('Verify player has expected name', () => {
+        const name = 'Kurimanju senpai';
+        const kurimanju = player(true, name);
+        expect(kurimanju.name).toBe(name);
+    })
+
+    test('Verify player uses default name if not specified', () => {
+        const name = 'Kurimanju senpai';
+        const kurimanju = player(true);
+        expect(kurimanju.name).toBe(name);
+    })
 });
