@@ -1,8 +1,8 @@
 import { player } from './player.js';
 export { gameController };
 
-const gameController = () => {
-    const challenger = player(true);
+const gameController = (challengerName = 'Challenger') => {
+    const challenger = player(true, challengerName);
     const rival = player(false);
     const getChallenger = () => challenger;
     const getRival = () => rival;

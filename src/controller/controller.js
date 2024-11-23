@@ -15,7 +15,7 @@ const handleBoardClick = () => {
 
 const init = () => {
     // init game and place ships
-    const game = gameController();
+    const game = gameController('Shisa');
     game.getChallenger().board.usePresetShipLayout();
     game.getRival().board.usePresetShipLayout();
 
