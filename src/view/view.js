@@ -61,11 +61,11 @@ const renderBoard = (boardElement, board) => {
 }
 
 const renderPlayerOneBoard = (board) => {
-    const holder = document.querySelector('#player-one-board');
+    const holder = document.querySelector('#challenger-board');
     renderBoard(holder, board);
 };
 
 const renderPlayerTwoBoard = (board) => {
-    const holder = document.querySelector('#player-two-board');
+    const holder = document.querySelector('#rival-board');
     renderBoard(holder, board);
 }
