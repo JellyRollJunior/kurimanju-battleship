@@ -3,7 +3,7 @@ import { renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
 const handleBoardClick = () => {
-    const playerOneBoard = document.querySelector('#player-one-board');
+    const playerOneBoard = document.querySelector('#rival-board');
     playerOneBoard.addEventListener('click', (event) => {
         const target = event.target;
         if (target.tagName == 'TD') {
