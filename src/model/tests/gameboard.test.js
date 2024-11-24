@@ -73,6 +73,25 @@ describe('The gameboard object', () => {
         expect(board.areAllSunk()).toBe(true);
     });
 
+    test('Verify getUnhitCoordinate returns a coordinate that is not hit before', () => {
+        const board = gameboard();
+        // hit every square except (0, 0)
+        for (let i = 1; i < board.length; i++) {
+            for (let j = 0; j < board.length; j++) {
+                board.receiveHit(i, j);
+            }
+        }
+        for (let i = 1; i < board.length; i++) {
+            board.receiveHit(0, i);
+        }
+        const validAttack = board.getUnhitCoordinate();
+        expect(validAttack[0]).toBe(0);
+        expect(validAttack[1]).toBe(0);
+        expect(board.getCell(validAttack[0], validAttack[1]).isHit()).toBe(
+            false
+        );
+    });
+
     test('Verify usePresetShipLayout places ships in predefined layout', () => {
         const preset = gameboard();
         preset.placeShip(1, 8, 1, false);
@@ -85,6 +104,8 @@ describe('The gameboard object', () => {
         preset.placeShip(8, 5, 4, true);
         const board = gameboard();
         board.usePresetShipLayout();
-        expect(board.getBoard().toString()).toStrictEqual(preset.getBoard().toString());
-    })
+        expect(board.getBoard().toString()).toStrictEqual(
+            preset.getBoard().toString()
+        );
+    });
 });

@@ -97,6 +97,17 @@ const gameboard = () => {
         return sunk;
     };
 
+    const getUnhitCoordinate = () => {
+        while (areAllSunk() == false) {
+            let x = Math.floor(Math.random() * length);
+            let y = Math.floor(Math.random() * length);
+            if (!getCell(x, y).isHit()) {
+                return [x, y];
+            }
+        }
+        return [1, 1];
+    };
+
     const usePresetShipLayout = () => {
         // Preset layout:
         // =====================
@@ -147,6 +158,7 @@ const gameboard = () => {
         placeShip,
         receiveHit,
         areAllSunk,
+        getUnhitCoordinate,
         usePresetShipLayout,
         prettyPrintBoard,
     };
@@ -154,3 +166,4 @@ const gameboard = () => {
 
 const board = gameboard();
 board.usePresetShipLayout();
+board.getUnhitCoordinate;
