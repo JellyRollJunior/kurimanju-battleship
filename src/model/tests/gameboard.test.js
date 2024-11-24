@@ -73,7 +73,7 @@ describe('The gameboard object', () => {
         expect(board.areAllSunk()).toBe(true);
     });
 
-    test('Verify getUnhitCoordinate returns a coordinate that is not hit before', () => {
+    test('Verify getRandomUnhitCoordinate returns a coordinate that is not hit before', () => {
         const board = gameboard();
         // hit every square except (0, 0)
         for (let i = 1; i < board.length; i++) {
@@ -84,7 +84,7 @@ describe('The gameboard object', () => {
         for (let i = 1; i < board.length; i++) {
             board.receiveHit(0, i);
         }
-        const validAttack = board.getUnhitCoordinate();
+        const validAttack = board.getRandomUnhitCoordinate();
         expect(validAttack[0]).toBe(0);
         expect(validAttack[1]).toBe(0);
         expect(board.getCell(validAttack[0], validAttack[1]).isHit()).toBe(

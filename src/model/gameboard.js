@@ -97,7 +97,7 @@ const gameboard = () => {
         return sunk;
     };
 
-    const getUnhitCoordinate = () => {
+    const getRandomUnhitCoordinate = () => {
         while (areAllSunk() == false) {
             let x = Math.floor(Math.random() * length);
             let y = Math.floor(Math.random() * length);
@@ -158,7 +158,7 @@ const gameboard = () => {
         placeShip,
         receiveHit,
         areAllSunk,
-        getUnhitCoordinate,
+        getRandomUnhitCoordinate,
         usePresetShipLayout,
         prettyPrintBoard,
     };
