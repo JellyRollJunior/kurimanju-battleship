@@ -35,14 +35,14 @@ const createHeaders = (length) => {
         headerItem.textContent = i;
         topHeader.appendChild(headerItem);
     }
-    rows.push(topHeader)
+    rows.push(topHeader);
     // create left headers
     for (let i = 0; i < length; i++) {
         const tableRow = document.createElement('tr');
         tableRow.dataset.row = i;
         const headerItem = document.createElement('th');
         headerItem.textContent = i;
-        tableRow.appendChild(headerItem)
+        tableRow.appendChild(headerItem);
         rows.push(tableRow);
     }
     return rows;
@@ -52,20 +52,28 @@ const renderBoard = (boardElement, board) => {
     const headers = createHeaders(board.length);
     headers.forEach((header) => boardElement.appendChild(header));
     board.forEach((row, rowIndex) => {
-        const tableRow = boardElement.querySelector(`tr[data-row="${rowIndex}"]`);
+        const tableRow = boardElement.querySelector(
+            `tr[data-row="${rowIndex}"]`
+        );
         row.forEach((cell, colIndex) => {
-            const td = createTableData(getPlayerBoardToken(cell), colIndex, rowIndex);
+            const td = createTableData(
+                getPlayerBoardToken(cell),
+                colIndex,
+                rowIndex
+            );
             tableRow.appendChild(td);
-        })
-    })
-}
+        });
+    });
+};
 
 const renderPlayerOneBoard = (board) => {
     const holder = document.querySelector('#challenger-board');
+    holder.textContent = '';
     renderBoard(holder, board);
 };
 
 const renderPlayerTwoBoard = (board) => {
     const holder = document.querySelector('#rival-board');
+    holder.textContent = '';
     renderBoard(holder, board);
-}
+};

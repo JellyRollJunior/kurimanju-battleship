@@ -1,8 +1,8 @@
 import { gameController } from '../model/game-controller.js';
-import { renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
+import { renderPlayerOneBoard, renderPlayerTwoBoard, clearBoards } from './../view/view.js';
 export { init };
 
-const handleBoardClick = () => {
+const handleBoardClick = (game) => {
     const playerOneBoard = document.querySelector('#rival-board');
     playerOneBoard.addEventListener('click', (event) => {
         const target = event.target;
