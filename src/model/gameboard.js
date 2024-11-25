@@ -139,10 +139,18 @@ const gameboard = () => {
             let rowString = '';
             row.forEach((cell) => {
                 if (cell.hasShip()) {
-                    rowString += ' S';
+                    if (cell.isHit()) {
+                        // cell hit and has ship
+                        rowString += ' Ꞩ';
+                    } else {
+                        // cell has a ship
+                        rowString += ' S';
+                    }
                 } else if (cell.isHit()) {
+                    // cell hit and vacant
                     rowString += ' X';
                 } else {
+                    // cell unhit
                     rowString += ' O';
                 }
             });
@@ -163,7 +171,3 @@ const gameboard = () => {
         prettyPrintBoard,
     };
 };
-
-const board = gameboard();
-board.usePresetShipLayout();
-board.getUnhitCoordinate;

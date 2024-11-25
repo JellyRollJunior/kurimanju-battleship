@@ -23,6 +23,12 @@ const gameController = (challengerName = 'Challenger') => {
             toggleDefendingPlayer();
         }
         // case 2: hit -> keep player the same
+        // if defending player is challenger and rival is computer, do random attack
+        if (getDefendingPlayer() == getChallenger() && getRival().isHuman == false) {
+            const randomAttack = getChallenger().board.getRandomUnhitCoordinate();
+            console.log(randomAttack);
+            playRound(randomAttack[0], randomAttack[1]);
+        }
     };
 
     const isGameOver = () => {
