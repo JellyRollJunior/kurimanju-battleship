@@ -1,4 +1,4 @@
-export { renderPlayerOneBoard, renderPlayerTwoBoard, displayPlayerTurn };
+export { renderPlayerOneBoard, renderPlayerTwoBoard, displayPlayerTurn, displayWinner };
 
 const createTableData = (text, x, y) => {
     const td = document.createElement('td');
@@ -78,11 +78,23 @@ const renderPlayerTwoBoard = (board) => {
     renderBoard(holder, board);
 };
 
-const displayPlayerTurn = (player) => {
+const setGameStateDisplayText = (message) => {
     const gameStateDisplay = document.querySelector('.game-state-display');
-    let message =  `${player.name}'s turn!`;
-    if (player.name == 'Kurimanju senpai') {
-        message =  `The goat ${player.name}'s turn!`;
-    }
     gameStateDisplay.textContent = message;
-}
+};
+
+const displayPlayerTurn = (player) => {
+    let message =
+        player.name == 'Kurimanju senpai'
+            ? `The goat ${player.name}'s turn!`
+            : `${player.name}'s turn!`;
+    setGameStateDisplayText(message);
+};
+
+const displayWinner = (player) => {
+    let message =
+        player.name == 'Kurimanju senpai'
+            ? `My glorious king ${player.name} is the Winner!`
+            : `${player.name} is the Winner!`;
+    setGameStateDisplayText(message);
+};

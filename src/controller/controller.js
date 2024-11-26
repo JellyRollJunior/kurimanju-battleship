@@ -1,5 +1,5 @@
 import { gameController } from '../model/game-controller.js';
-import { displayPlayerTurn, renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
+import { displayPlayerTurn, displayWinner, renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
 const renderBoards = (game) => {
@@ -35,6 +35,7 @@ const handleBoardClick = (game) => {
             if (game.isGameOver()) {
                 const winner = game.getWinner();
                 console.log(`winner is ${winner.name}!`);
+                displayWinner(winner);
             }
         }
     });
