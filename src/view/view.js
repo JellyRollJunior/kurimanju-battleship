@@ -5,6 +5,8 @@ export {
     displayWinner,
     disableBoardClick,
     enableBoardClick,
+    disableClickRegistering,
+    enableClickRegistering,
 };
 
 const createTableData = (text, x, y) => {
@@ -134,4 +136,19 @@ const disableBoardClick = () => {
 
 const enableBoardClick = () => {
     rivalBoard.style.pointerEvents = 'auto';
+}
+
+const randomizeButton = document.querySelector('#randomize')
+const restartButton = document.querySelector('#restart');
+
+const disableClickRegistering = () => {
+    disableBoardClick();
+    randomizeButton.style.pointerEvents = 'none';
+    restartButton.style.pointerEvents = 'none';
+}
+
+const enableClickRegistering = () => {
+    enableBoardClick();
+    randomizeButton.style.pointerEvents = 'auto';
+    restartButton.style.pointerEvents = 'auto';
 }

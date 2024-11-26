@@ -6,6 +6,8 @@ import {
     enableBoardClick,
     renderChallengerBoard,
     renderRivalBoard,
+    disableClickRegistering,
+    enableClickRegistering,
 } from './../view/view.js';
 export { init };
 
@@ -34,15 +36,21 @@ const handleBoardClick = (game) => {
                 game.getRival().isHuman == false
             ) {
                 // disable clicking board while the goat is thinking
-                disableBoardClick();
+                disableClickRegistering();
                 displayPlayerTurn(game.getRival());
                 // mimic my goat kurimanju thinking! (he would never think so long)
                 await new Promise((resolve) => setTimeout(resolve, 2000));
                 // computer plays round
-                const randomAttack = game.getChallenger().board.getRandomUnhitCoordinate();
+                const randomAttack = game
+                    .getChallenger()
+                    .board.getRandomUnhitCoordinate();
                 game.playRound(randomAttack[0], randomAttack[1]);
-                renderChallengerBoard(game.getChallenger().board.getBoard(), randomAttack[0], randomAttack[1]);
-                enableBoardClick();
+                renderChallengerBoard(
+                    game.getChallenger().board.getBoard(),
+                    randomAttack[0],
+                    randomAttack[1]
+                );
+                enableClickRegistering();
             }
 
             displayPlayerTurn(game.getChallenger());
@@ -54,6 +62,7 @@ const handleBoardClick = (game) => {
 const bindRestartButton = (game) => {
     const restartButton = document.querySelector('#restart');
     restartButton.addEventListener('click', () => {
+        enableBoardClick();
         game.restart();
         game.useDefaultShipPlacements();
         renderChallengerBoard(game.getChallenger().board.getBoard());
@@ -62,20 +71,21 @@ const bindRestartButton = (game) => {
 };
 
 const bindRandomizeShipPlacementButton = (game) => {
-    const randomizeButton = document.querySelector('#randomize')
+    const randomizeButton = document.querySelector('#randomize');
     randomizeButton.addEventListener('click', () => {
+        enableBoardClick();
         game.restart();
         game.useRandomShipPlacements();
         renderChallengerBoard(game.getChallenger().board.getBoard());
         renderRivalBoard(game.getRival().board.getBoard());
-    })
-}
+    });
+};
 
 const init = () => {
     const game = gameController('Shisa');
     renderChallengerBoard(game.getChallenger().board.getBoard());
     renderRivalBoard(game.getRival().board.getBoard());
-    
+
     // event handlers
     handleBoardClick(game);
     bindRestartButton(game);
