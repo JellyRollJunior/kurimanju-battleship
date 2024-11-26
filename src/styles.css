@@ -110,13 +110,23 @@ td.highlight {
   border: 3px solid red;
 }
 
+.menu {
+  --display-width: 300px;
+  display: grid;
+  grid-template-columns: 1fr var(--display-width) 1fr;
+  gap: 55px;
+
+  margin-top: 45px;
+}
+
 .game-state-display {
   --display-height: 50px;
+  flex: 1;
+  
   text-align: center;
   line-height: var(--display-height);
   height: var(--display-height);
-  width: 300px;
-  margin-top: 45px;
+  width: var(--display-width);
   border: 2px solid black;
   border-radius: 25px;
 }
