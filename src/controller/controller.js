@@ -55,10 +55,21 @@ const bindRestartButton = (game) => {
     const restartButton = document.querySelector('#restart');
     restartButton.addEventListener('click', () => {
         game.restart();
+        game.useDefaultShipPlacements();
         renderChallengerBoard(game.getChallenger().board.getBoard());
         renderRivalBoard(game.getRival().board.getBoard());
     });
 };
+
+const bindRandomizeShipPlacementButton = (game) => {
+    const randomizeButton = document.querySelector('#randomize')
+    randomizeButton.addEventListener('click', () => {
+        game.restart();
+        game.useRandomShipPlacements();
+        renderChallengerBoard(game.getChallenger().board.getBoard());
+        renderRivalBoard(game.getRival().board.getBoard());
+    })
+}
 
 const init = () => {
     const game = gameController('Shisa');
@@ -68,4 +79,5 @@ const init = () => {
     // event handlers
     handleBoardClick(game);
     bindRestartButton(game);
+    bindRandomizeShipPlacementButton(game);
 };

@@ -40,19 +40,24 @@ const gameController = (challengerName = 'Challenger') => {
         return null;
     };
 
+    // restart game with blank boards
     const restart = () => {
         challenger = player(true, challengerName);
         rival = player(false);
-        initialSetup();
+        defendingPlayer = getRival();
     };
 
-    const initialSetup = () => {
-        defendingPlayer = getRival();
+    const useDefaultShipPlacements = () => {
         getChallenger().board.usePresetShipLayout();
         getRival().board.useRandomShipLayout();
     }
 
-    initialSetup();
+    const useRandomShipPlacements = () => {
+        getChallenger().board.useRandomShipLayout();
+        getRival().board.useRandomShipLayout();
+    }
+
+    useDefaultShipPlacements();
 
     return {
         getChallenger,
@@ -62,5 +67,7 @@ const gameController = (challengerName = 'Challenger') => {
         isGameOver,
         getWinner,
         restart,
+        useDefaultShipPlacements,
+        useRandomShipPlacements,
     };
 };
