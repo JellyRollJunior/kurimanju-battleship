@@ -1,47 +1,63 @@
 import { gameController } from '../model/game-controller.js';
-import { displayPlayerTurn, displayWinner, renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
+import {
+    disableBoardClick,
+    displayPlayerTurn,
+    displayWinner,
+    renderPlayerOneBoard,
+    renderPlayerTwoBoard,
+} from './../view/view.js';
 export { init };
 
 const renderBoards = (game) => {
     renderPlayerOneBoard(game.getChallenger().board.getBoard());
     renderPlayerTwoBoard(game.getRival().board.getBoard());
-}
+};
 
 const computerPlaysRound = (game) => {
     const randomAttack = game.getChallenger().board.getRandomUnhitCoordinate();
     game.playRound(randomAttack[0], randomAttack[1]);
     renderBoards(game);
-}
+};
 
 const checkGameOver = (game) => {
     if (game.isGameOver()) {
         const winner = game.getWinner();
         console.log(`winner is ${winner.name}!`);
         displayWinner(winner);
+        disableBoardClick();
     }
-}
+};
 
 const handleBoardClick = (game) => {
-    const playerOneBoard = document.querySelector('#rival-board');
-    playerOneBoard.addEventListener('click', async (event) => {
+    return async function curriedHandleBoardClick(event) {
         const target = event.target;
         if (target.tagName == 'TD') {
             const x = target.dataset.column;
             const y = target.dataset.row;
+            console.log(x);
+            console.log(y);
             game.playRound(x, y);
             renderBoards(game);
 
             // if defending player is challenger and rival is computer, computer attacks
-            while (game.getDefendingPlayer() == game.getChallenger() && game.getRival().isHuman == false) {
+            while (
+                game.getDefendingPlayer() == game.getChallenger() &&
+                game.getRival().isHuman == false
+            ) {
                 displayPlayerTurn(game.getRival());
                 // computer thinks!
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                await new Promise((resolve) => setTimeout(resolve, 2000));
                 computerPlaysRound(game);
             }
             displayPlayerTurn(game.getChallenger());
             checkGameOver(game);
         }
-    });
+    };
+};
+
+const bindBoardData = (game) => {
+    const rivalBoard = document.querySelector('#rival-board');
+    rivalBoard.addEventListener('click', handleBoardClick(game));
 };
 
 const init = () => {
@@ -50,9 +66,9 @@ const init = () => {
     game.getChallenger().board.usePresetShipLayout();
     game.getRival().board.usePresetShipLayout();
 
-    renderBoards(game)
+    renderBoards(game);
     displayPlayerTurn(game.getChallenger());
 
     // event handlers
-    handleBoardClick(game);
+    bindBoardData(game);
 };

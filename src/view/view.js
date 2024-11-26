@@ -1,4 +1,10 @@
-export { renderPlayerOneBoard, renderPlayerTwoBoard, displayPlayerTurn, displayWinner };
+export {
+    renderPlayerOneBoard,
+    renderPlayerTwoBoard,
+    displayPlayerTurn,
+    displayWinner,
+    disableBoardClick,
+};
 
 const createTableData = (text, x, y) => {
     const td = document.createElement('td');
@@ -66,6 +72,8 @@ const renderBoard = (boardElement, board) => {
     });
 };
 
+const rivalBoard = document.querySelector('#rival-board');
+
 const renderPlayerOneBoard = (board) => {
     const holder = document.querySelector('#challenger-board');
     holder.textContent = '';
@@ -73,9 +81,8 @@ const renderPlayerOneBoard = (board) => {
 };
 
 const renderPlayerTwoBoard = (board) => {
-    const holder = document.querySelector('#rival-board');
-    holder.textContent = '';
-    renderBoard(holder, board);
+    rivalBoard.textContent = '';
+    renderBoard(rivalBoard, board);
 };
 
 const setGameStateDisplayText = (message) => {
@@ -97,4 +104,8 @@ const displayWinner = (player) => {
             ? `My glorious king ${player.name} is the Winner!`
             : `${player.name} is the Winner!`;
     setGameStateDisplayText(message);
+};
+
+const disableBoardClick = () => {
+    rivalBoard.style.pointerEvents = 'none';
 };
