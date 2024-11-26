@@ -89,6 +89,10 @@ td {
   border: 1px solid black;
 }
 
+td.highlight {
+  border: 3px solid red;
+}
+
 .game-state-display {
   --display-height: 50px;
   text-align: center;

@@ -55,7 +55,7 @@ const createHeaders = (length) => {
     return rows;
 };
 
-const renderBoard = (boardElement, board) => {
+const renderBoard = (boardElement, board, lastMoveX, lastMoveY) => {
     const headers = createHeaders(board.length);
     headers.forEach((header) => boardElement.appendChild(header));
     board.forEach((row, rowIndex) => {
@@ -68,6 +68,9 @@ const renderBoard = (boardElement, board) => {
                 colIndex,
                 rowIndex
             );
+            if (colIndex == lastMoveX && rowIndex == lastMoveY) {
+                td.classList.add('highlight')
+            }
             tableRow.appendChild(td);
         });
     });
@@ -75,15 +78,15 @@ const renderBoard = (boardElement, board) => {
 
 const rivalBoard = document.querySelector('#rival-board');
 
-const renderPlayerOneBoard = (board) => {
+const renderPlayerOneBoard = (board, lastMoveX, lastMoveY) => {
     const holder = document.querySelector('#challenger-board');
     holder.textContent = '';
-    renderBoard(holder, board);
+    renderBoard(holder, board, lastMoveX, lastMoveY);
 };
 
-const renderPlayerTwoBoard = (board) => {
+const renderPlayerTwoBoard = (board, lastMoveX, lastMoveY) => {
     rivalBoard.textContent = '';
-    renderBoard(rivalBoard, board);
+    renderBoard(rivalBoard, board, lastMoveX, lastMoveY);
 };
 
 const setGameStateDisplayText = (message) => {
