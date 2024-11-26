@@ -19,7 +19,8 @@ const checkGameOver = (game) => {
 };
 
 const handleBoardClick = (game) => {
-    return async function curriedHandleBoardClick(event) {
+    const rivalBoard = document.querySelector('#rival-board');
+    rivalBoard.addEventListener('click', async (event) => {
         const target = event.target;
         if (target.tagName == 'TD') {
             const x = target.dataset.column;
@@ -47,12 +48,7 @@ const handleBoardClick = (game) => {
             displayPlayerTurn(game.getChallenger());
             checkGameOver(game);
         }
-    };
-};
-
-const bindBoardData = (game) => {
-    const rivalBoard = document.querySelector('#rival-board');
-    rivalBoard.addEventListener('click', handleBoardClick(game));
+    });
 };
 
 const bindRestartButton = () => {
@@ -66,7 +62,7 @@ const startNewGame = (game) => {
     game.getRival().board.useRandomShipLayout();
     renderChallengerBoard(game.getChallenger().board.getBoard());
     renderRivalBoard(game.getRival().board.getBoard());
-    bindBoardData(game);
+    handleBoardClick(game);
 };
 
 const init = () => {
