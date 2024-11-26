@@ -4,6 +4,7 @@ export {
     displayPlayerTurn,
     displayWinner,
     disableBoardClick,
+    enableBoardClick,
 };
 
 const createTableData = (text, x, y) => {
@@ -109,3 +110,7 @@ const displayWinner = (player) => {
 const disableBoardClick = () => {
     rivalBoard.style.pointerEvents = 'none';
 };
+
+const enableBoardClick = () => {
+    rivalBoard.style.pointerEvents = 'auto';
+}

@@ -3,6 +3,7 @@ import {
     disableBoardClick,
     displayPlayerTurn,
     displayWinner,
+    enableBoardClick,
     renderPlayerOneBoard,
     renderPlayerTwoBoard,
 } from './../view/view.js';
@@ -44,10 +45,13 @@ const handleBoardClick = (game) => {
                 game.getDefendingPlayer() == game.getChallenger() &&
                 game.getRival().isHuman == false
             ) {
+                // disable clicking board while the goat is thinking
+                disableBoardClick();
                 displayPlayerTurn(game.getRival());
-                // computer thinks!
+                // mimic my goat kurimanju thinking! (he would never think so long)
                 await new Promise((resolve) => setTimeout(resolve, 2000));
                 computerPlaysRound(game);
+                enableBoardClick();
             }
             displayPlayerTurn(game.getChallenger());
             checkGameOver(game);
