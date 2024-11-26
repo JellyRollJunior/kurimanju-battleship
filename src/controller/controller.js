@@ -51,21 +51,21 @@ const handleBoardClick = (game) => {
     });
 };
 
-const bindRestartButton = () => {
+const bindRestartButton = (game) => {
     const restartButton = document.querySelector('#restart');
-    restartButton.addEventListener('click', startNewGame);
-};
-
-const startNewGame = (game) => {
-    game = gameController('Shisa');
-    game.getChallenger().board.usePresetShipLayout();
-    game.getRival().board.useRandomShipLayout();
-    renderChallengerBoard(game.getChallenger().board.getBoard());
-    renderRivalBoard(game.getRival().board.getBoard());
-    handleBoardClick(game);
+    restartButton.addEventListener('click', () => {
+        game.restart();
+        renderChallengerBoard(game.getChallenger().board.getBoard());
+        renderRivalBoard(game.getRival().board.getBoard());
+    });
 };
 
 const init = () => {
-    startNewGame();
-    bindRestartButton();
+    const game = gameController('Shisa');
+    renderChallengerBoard(game.getChallenger().board.getBoard());
+    renderRivalBoard(game.getRival().board.getBoard());
+    
+    // event handlers
+    handleBoardClick(game);
+    bindRestartButton(game);
 };

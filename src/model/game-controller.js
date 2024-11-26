@@ -2,8 +2,8 @@ import { player } from './player.js';
 export { gameController };
 
 const gameController = (challengerName = 'Challenger') => {
-    const challenger = player(true, challengerName);
-    const rival = player(false);
+    let challenger = player(true, challengerName);
+    let rival = player(false);
     const getChallenger = () => challenger;
     const getRival = () => rival;
 
@@ -40,6 +40,20 @@ const gameController = (challengerName = 'Challenger') => {
         return null;
     };
 
+    const restart = () => {
+        challenger = player(true, challengerName);
+        rival = player(false);
+        initialSetup();
+    };
+
+    const initialSetup = () => {
+        defendingPlayer = getRival();
+        getChallenger().board.usePresetShipLayout();
+        getRival().board.useRandomShipLayout();
+    }
+
+    initialSetup();
+
     return {
         getChallenger,
         getRival,
@@ -47,5 +61,6 @@ const gameController = (challengerName = 'Challenger') => {
         playRound,
         isGameOver,
         getWinner,
+        restart,
     };
 };
