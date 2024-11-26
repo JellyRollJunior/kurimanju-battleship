@@ -11,7 +11,7 @@ const computerPlaysRound = (game) => {
 
 const handleBoardClick = (game) => {
     const playerOneBoard = document.querySelector('#rival-board');
-    playerOneBoard.addEventListener('click', (event) => {
+    playerOneBoard.addEventListener('click', async (event) => {
         const target = event.target;
         if (target.tagName == 'TD') {
             const x = target.dataset.column;
@@ -19,9 +19,10 @@ const handleBoardClick = (game) => {
             game.playRound(x, y);
             renderPlayerOneBoard(game.getChallenger().board.getBoard());
             renderPlayerTwoBoard(game.getRival().board.getBoard());
-
             // if defending player is challenger and rival is computer, computer attacks
             while (game.getDefendingPlayer() == game.getChallenger() && game.getRival().isHuman == false) {
+                // computer thinks!
+                await new Promise(resolve => setTimeout(resolve, 2000));
                 computerPlaysRound(game);
             }
             if (game.isGameOver()) {
