@@ -9,12 +9,6 @@ import {
 } from './../view/view.js';
 export { init };
 
-const computerPlaysRound = (game) => {
-    const randomAttack = game.getChallenger().board.getRandomUnhitCoordinate();
-    game.playRound(randomAttack[0], randomAttack[1]);
-    renderChallengerBoard(game.getChallenger().board.getBoard(), randomAttack[0], randomAttack[1]);
-};
-
 const checkGameOver = (game) => {
     if (game.isGameOver()) {
         const winner = game.getWinner();
@@ -43,9 +37,13 @@ const handleBoardClick = (game) => {
                 displayPlayerTurn(game.getRival());
                 // mimic my goat kurimanju thinking! (he would never think so long)
                 await new Promise((resolve) => setTimeout(resolve, 2000));
-                computerPlaysRound(game);
+                // computer plays round
+                const randomAttack = game.getChallenger().board.getRandomUnhitCoordinate();
+                game.playRound(randomAttack[0], randomAttack[1]);
+                renderChallengerBoard(game.getChallenger().board.getBoard(), randomAttack[0], randomAttack[1]);
                 enableBoardClick();
             }
+            
             displayPlayerTurn(game.getChallenger());
             checkGameOver(game);
         }
