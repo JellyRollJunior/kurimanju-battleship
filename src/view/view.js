@@ -1,6 +1,6 @@
 export {
-    renderPlayerOneBoard,
-    renderPlayerTwoBoard,
+    renderChallengerBoard,
+    renderRivalBoard,
     displayPlayerTurn,
     displayWinner,
     disableBoardClick,
@@ -78,13 +78,13 @@ const renderBoard = (boardElement, board, lastMoveX, lastMoveY) => {
 
 const rivalBoard = document.querySelector('#rival-board');
 
-const renderPlayerOneBoard = (board, lastMoveX, lastMoveY) => {
+const renderChallengerBoard = (board, lastMoveX, lastMoveY) => {
     const holder = document.querySelector('#challenger-board');
     holder.textContent = '';
     renderBoard(holder, board, lastMoveX, lastMoveY);
 };
 
-const renderPlayerTwoBoard = (board, lastMoveX, lastMoveY) => {
+const renderRivalBoard = (board, lastMoveX, lastMoveY) => {
     rivalBoard.textContent = '';
     renderBoard(rivalBoard, board, lastMoveX, lastMoveY);
 };

@@ -4,15 +4,15 @@ import {
     displayPlayerTurn,
     displayWinner,
     enableBoardClick,
-    renderPlayerOneBoard,
-    renderPlayerTwoBoard,
+    renderChallengerBoard,
+    renderRivalBoard,
 } from './../view/view.js';
 export { init };
 
 const computerPlaysRound = (game) => {
     const randomAttack = game.getChallenger().board.getRandomUnhitCoordinate();
     game.playRound(randomAttack[0], randomAttack[1]);
-    renderPlayerOneBoard(game.getChallenger().board.getBoard(), randomAttack[0], randomAttack[1]);
+    renderChallengerBoard(game.getChallenger().board.getBoard(), randomAttack[0], randomAttack[1]);
 };
 
 const checkGameOver = (game) => {
@@ -30,10 +30,8 @@ const handleBoardClick = (game) => {
         if (target.tagName == 'TD') {
             const x = target.dataset.column;
             const y = target.dataset.row;
-            console.log(x);
-            console.log(y);
             game.playRound(x, y);
-            renderPlayerTwoBoard(game.getRival().board.getBoard(), x, y);
+            renderRivalBoard(game.getRival().board.getBoard(), x, y);
 
             // if defending player is challenger and rival is computer, computer attacks
             while (
@@ -65,8 +63,8 @@ const init = () => {
     game.getChallenger().board.usePresetShipLayout();
     game.getRival().board.usePresetShipLayout();
 
-    renderPlayerOneBoard(game.getChallenger().board.getBoard());
-    renderPlayerTwoBoard(game.getRival().board.getBoard());
+    renderChallengerBoard(game.getChallenger().board.getBoard());
+    renderRivalBoard(game.getRival().board.getBoard());
     displayPlayerTurn(game.getChallenger());
 
     // event handlers
