@@ -2,11 +2,15 @@ import { gameController } from '../model/game-controller.js';
 import { displayPlayerTurn, renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
+const renderBoards = (game) => {
+    renderPlayerOneBoard(game.getChallenger().board.getBoard());
+    renderPlayerTwoBoard(game.getRival().board.getBoard());
+}
+
 const computerPlaysRound = (game) => {
     const randomAttack = game.getChallenger().board.getRandomUnhitCoordinate();
     game.playRound(randomAttack[0], randomAttack[1]);
-    renderPlayerOneBoard(game.getChallenger().board.getBoard());
-    renderPlayerTwoBoard(game.getRival().board.getBoard());
+    renderBoards(game);
 }
 
 const handleBoardClick = (game) => {
@@ -17,8 +21,8 @@ const handleBoardClick = (game) => {
             const x = target.dataset.column;
             const y = target.dataset.row;
             game.playRound(x, y);
-            renderPlayerOneBoard(game.getChallenger().board.getBoard());
-            renderPlayerTwoBoard(game.getRival().board.getBoard());
+            renderBoards(game);
+
             // if defending player is challenger and rival is computer, computer attacks
             while (game.getDefendingPlayer() == game.getChallenger() && game.getRival().isHuman == false) {
                 displayPlayerTurn(game.getRival());
@@ -26,6 +30,7 @@ const handleBoardClick = (game) => {
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 computerPlaysRound(game);
             }
+
             displayPlayerTurn(game.getChallenger());
             if (game.isGameOver()) {
                 const winner = game.getWinner();
@@ -41,8 +46,7 @@ const init = () => {
     game.getChallenger().board.usePresetShipLayout();
     game.getRival().board.usePresetShipLayout();
 
-    renderPlayerOneBoard(game.getChallenger().board.getBoard());
-    renderPlayerTwoBoard(game.getRival().board.getBoard());
+    renderBoards(game)
     displayPlayerTurn(game.getChallenger());
 
     // event handlers
