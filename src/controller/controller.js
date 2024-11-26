@@ -8,6 +8,7 @@ import {
     renderRivalBoard,
     disableClickRegistering,
     enableClickRegistering,
+    renderCheatingRivalBoard,
 } from './../view/view.js';
 export { init };
 
@@ -81,6 +82,13 @@ const bindRandomizeShipPlacementButton = (game) => {
     });
 };
 
+const bindCheaterButton = (game) => {
+    const cheaterButton = document.querySelector('#cheat');
+    cheaterButton.addEventListener('click', () => {
+        renderCheatingRivalBoard(game.getRival().board.getBoard());
+    })
+}
+
 const init = () => {
     const game = gameController('Shisa');
     renderChallengerBoard(game.getChallenger().board.getBoard());
@@ -90,4 +98,5 @@ const init = () => {
     handleBoardClick(game);
     bindRestartButton(game);
     bindRandomizeShipPlacementButton(game);
+    bindCheaterButton(game);
 };

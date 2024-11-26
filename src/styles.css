@@ -163,3 +163,10 @@ footer {
   margin-top: 32px;
   background-color: #678a96;
 }
+
+#cheat {
+  background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}

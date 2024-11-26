@@ -1,6 +1,7 @@
 export {
     renderChallengerBoard,
     renderRivalBoard,
+    renderCheatingRivalBoard,
     displayPlayerTurn,
     displayWinner,
     disableBoardClick,
@@ -155,6 +156,18 @@ const renderRivalBoard = (board, lastMoveX, lastMoveY) => {
         board,
         getRivalBoardToken,
         getRivalTokenStyling,
+        lastMoveX,
+        lastMoveY
+    );
+};
+
+const renderCheatingRivalBoard = (board, lastMoveX, lastMoveY) => {
+    rivalBoard.textContent = '';
+    renderBoard(
+        rivalBoard,
+        board,
+        getPlayerBoardToken,
+        getPlayerTokenStyling,
         lastMoveX,
         lastMoveY
     );
