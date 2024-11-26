@@ -17,7 +17,7 @@ const createTableData = (text, x, y) => {
     return td;
 };
 
-const getRivalBoardToken = (cell) => {
+const getPlayerBoardToken = (cell) => {
     if (cell.hasShip()) {
         if (cell.isHit()) {
             // cell hit and has ship
@@ -51,6 +51,40 @@ const getPlayerTokenStyling = (cell) => {
     }
 };
 
+const getRivalBoardToken = (cell) => {
+    if (cell.hasShip()) {
+        if (cell.isHit()) {
+            // cell hit and has ship
+            return 'Ꞩ';
+        }
+        // cell has a ship (but hide from player)
+        return '';
+    } else if (cell.isHit()) {
+        // cell hit and vacant
+        return '·';
+    } else {
+        // cell unhit
+        return '';
+    }
+};
+
+const getRivalTokenStyling = (cell) => {
+    if (cell.hasShip()) {
+        if (cell.isHit()) {
+            // cell hit and has ship
+            return 'hit';
+        }
+        // cell has a ship (but hide from player)
+        return 'unhit';
+    } else if (cell.isHit()) {
+        // cell hit and vacant
+        return 'miss';
+    } else {
+        // cell unhit
+        return 'unhit';
+    }
+};
+
 const createHeaders = (length) => {
     const rows = [];
     // create top headers
@@ -74,7 +108,14 @@ const createHeaders = (length) => {
     return rows;
 };
 
-const renderBoard = (boardElement, board, lastMoveX, lastMoveY) => {
+const renderBoard = (
+    boardElement,
+    board,
+    tokenFunction,
+    tokenStylingFunction,
+    lastMoveX,
+    lastMoveY
+) => {
     const headers = createHeaders(board.length);
     headers.forEach((header) => boardElement.appendChild(header));
     board.forEach((row, rowIndex) => {
@@ -82,14 +123,10 @@ const renderBoard = (boardElement, board, lastMoveX, lastMoveY) => {
             `tr[data-row="${rowIndex}"]`
         );
         row.forEach((cell, colIndex) => {
-            const td = createTableData(
-                getRivalBoardToken(cell),
-                colIndex,
-                rowIndex
-            );
-            td.classList.add(getPlayerTokenStyling(cell));
+            const td = createTableData(tokenFunction(cell), colIndex, rowIndex);
+            td.classList.add(tokenStylingFunction(cell));
             if (colIndex == lastMoveX && rowIndex == lastMoveY) {
-                td.classList.add('highlight')
+                td.classList.add('highlight');
             }
             tableRow.appendChild(td);
         });
@@ -101,12 +138,26 @@ const rivalBoard = document.querySelector('#rival-board');
 const renderChallengerBoard = (board, lastMoveX, lastMoveY) => {
     const holder = document.querySelector('#challenger-board');
     holder.textContent = '';
-    renderBoard(holder, board, lastMoveX, lastMoveY);
+    renderBoard(
+        holder,
+        board,
+        getPlayerBoardToken,
+        getPlayerTokenStyling,
+        lastMoveX,
+        lastMoveY
+    );
 };
 
 const renderRivalBoard = (board, lastMoveX, lastMoveY) => {
     rivalBoard.textContent = '';
-    renderBoard(rivalBoard, board, lastMoveX, lastMoveY);
+    renderBoard(
+        rivalBoard,
+        board,
+        getRivalBoardToken,
+        getRivalTokenStyling,
+        lastMoveX,
+        lastMoveY
+    );
 };
 
 const setGameStateDisplayText = (message) => {
@@ -136,19 +187,19 @@ const disableBoardClick = () => {
 
 const enableBoardClick = () => {
     rivalBoard.style.pointerEvents = 'auto';
-}
+};
 
-const randomizeButton = document.querySelector('#randomize')
+const randomizeButton = document.querySelector('#randomize');
 const restartButton = document.querySelector('#restart');
 
 const disableClickRegistering = () => {
     disableBoardClick();
     randomizeButton.style.pointerEvents = 'none';
     restartButton.style.pointerEvents = 'none';
-}
+};
 
 const enableClickRegistering = () => {
     enableBoardClick();
     randomizeButton.style.pointerEvents = 'auto';
     restartButton.style.pointerEvents = 'auto';
-}
+};
