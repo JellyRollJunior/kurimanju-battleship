@@ -48,6 +48,10 @@ h1 {
   margin-top: 24px;
 }
 
+h3 {
+  margin-top: 12px;
+}
+
 .quad-content-separated {
   display: grid;
   justify-items: center;
@@ -55,7 +59,7 @@ h1 {
   grid-template-columns: 240px 1fr 80px 1fr 240px;
   gap: 12px;
 
-  margin-top: 55px;
+  margin-top: 45px;
   text-align: center;
 }
 
