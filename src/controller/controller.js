@@ -1,5 +1,5 @@
 import { gameController } from '../model/game-controller.js';
-import { renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
+import { displayPlayerTurn, renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
 const computerPlaysRound = (game) => {
@@ -21,10 +21,12 @@ const handleBoardClick = (game) => {
             renderPlayerTwoBoard(game.getRival().board.getBoard());
             // if defending player is challenger and rival is computer, computer attacks
             while (game.getDefendingPlayer() == game.getChallenger() && game.getRival().isHuman == false) {
+                displayPlayerTurn(game.getRival());
                 // computer thinks!
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 computerPlaysRound(game);
             }
+            displayPlayerTurn(game.getChallenger());
             if (game.isGameOver()) {
                 const winner = game.getWinner();
                 console.log(`winner is ${winner.name}!`);
@@ -39,9 +41,9 @@ const init = () => {
     game.getChallenger().board.usePresetShipLayout();
     game.getRival().board.usePresetShipLayout();
 
-    // render board
     renderPlayerOneBoard(game.getChallenger().board.getBoard());
     renderPlayerTwoBoard(game.getRival().board.getBoard());
+    displayPlayerTurn(game.getChallenger());
 
     // event handlers
     handleBoardClick(game);
