@@ -13,6 +13,14 @@ const computerPlaysRound = (game) => {
     renderBoards(game);
 }
 
+const checkGameOver = (game) => {
+    if (game.isGameOver()) {
+        const winner = game.getWinner();
+        console.log(`winner is ${winner.name}!`);
+        displayWinner(winner);
+    }
+}
+
 const handleBoardClick = (game) => {
     const playerOneBoard = document.querySelector('#rival-board');
     playerOneBoard.addEventListener('click', async (event) => {
@@ -30,13 +38,8 @@ const handleBoardClick = (game) => {
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 computerPlaysRound(game);
             }
-
             displayPlayerTurn(game.getChallenger());
-            if (game.isGameOver()) {
-                const winner = game.getWinner();
-                console.log(`winner is ${winner.name}!`);
-                displayWinner(winner);
-            }
+            checkGameOver(game);
         }
     });
 };
