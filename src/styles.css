@@ -85,7 +85,20 @@ th {
   margin: 0;
 }
 
-td {
+td.hit {
+  border: 3px solid red;
+}
+
+td.ship {
+  border: 3px solid navy;
+}
+
+td.miss {
+  background-color: #bebebe;
+}
+
+td,
+td.unhit {
   border: 1px solid black;
 }
 

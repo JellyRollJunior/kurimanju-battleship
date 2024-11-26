@@ -15,7 +15,7 @@ const createTableData = (text, x, y) => {
     return td;
 };
 
-const getPlayerBoardToken = (cell) => {
+const getRivalBoardToken = (cell) => {
     if (cell.hasShip()) {
         if (cell.isHit()) {
             // cell hit and has ship
@@ -25,10 +25,27 @@ const getPlayerBoardToken = (cell) => {
         return 'S';
     } else if (cell.isHit()) {
         // cell hit and vacant
-        return 'X';
+        return '·';
     } else {
         // cell unhit
-        return 'O';
+        return '';
+    }
+};
+
+const getPlayerTokenStyling = (cell) => {
+    if (cell.hasShip()) {
+        if (cell.isHit()) {
+            // cell hit and has ship
+            return 'hit';
+        }
+        // cell has a ship
+        return 'ship';
+    } else if (cell.isHit()) {
+        // cell hit and vacant
+        return 'miss';
+    } else {
+        // cell unhit
+        return 'unhit';
     }
 };
 
@@ -64,10 +81,11 @@ const renderBoard = (boardElement, board, lastMoveX, lastMoveY) => {
         );
         row.forEach((cell, colIndex) => {
             const td = createTableData(
-                getPlayerBoardToken(cell),
+                getRivalBoardToken(cell),
                 colIndex,
                 rowIndex
             );
+            td.classList.add(getPlayerTokenStyling(cell));
             if (colIndex == lastMoveX && rowIndex == lastMoveY) {
                 td.classList.add('highlight')
             }
