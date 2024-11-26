@@ -44,7 +44,7 @@ body {
   align-items: center;
 }
 
-.playing-area {
+.dual-content-separated {
   display: grid;
   justify-items: center;
   align-items: center;
@@ -92,4 +92,14 @@ td {
   margin-top: 45px;
   border: 2px solid black;
   border-radius: 25px;
+}
+
+.fighters {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 150px 1fr;
+
+  margin-top: 25px;
+  text-align: center;
 }
