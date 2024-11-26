@@ -6,30 +6,32 @@
     <title>kurimanju-battleship</title>
   </head>
   <body>
-    <h1>Kurimanju Battleship</h1>
-    <h3>
-      Play an exciting game of battleship against everyone's friend Kurimanju
-      Senpai!
-    </h3>
-    <div class="quad-content-separated">
-      <div class="img-frame">
-        <h3>Challenger:</h3>
-        <h3>Shisa</h3>
-        <img src="./images/shisa.png" alt="" class="challenger-image" />
+    <div class="wrapper">
+      <h1>Kurimanju Battleship</h1>
+      <h3>
+        Play an exciting game of battleship against everyone's friend Kurimanju
+        Senpai!
+      </h3>
+      <div class="quad-content-separated">
+        <div class="img-frame">
+          <h3>Challenger:</h3>
+          <h3>Shisa</h3>
+          <img src="./images/shisa.png" alt="" class="challenger-image" />
+        </div>
+        <table id="challenger-board"></table>
+        <h3>VS</h3>
+        <table id="rival-board"></table>
+        <div class="img-frame">
+          <h3>Rival:</h3>
+          <h3>The GOAT Kurimanju Senpai</h3>
+          <img src="./images/kurimanju.png" alt="" class="rival-image" />
+        </div>
       </div>
-      <table id="challenger-board"></table>
-      <h3>VS</h3>
-      <table id="rival-board"></table>
-      <div class="img-frame">
-        <h3>Rival:</h3>
-        <h3>The GOAT Kurimanju Senpai</h3>
-        <img src="./images/kurimanju.png" alt="" class="rival-image" />
+      <div class="menu">
+        <button id="randomize">Randomize ship placement</button>
+        <div class="game-state-display">It is your turn!</div>
+        <button id="restart">Restart game</button>
       </div>
-    </div>
-    <div class="menu">
-      <button id="randomize">Randomize ship placement</button>
-      <div class="game-state-display">It is your turn!</div>
-      <button id="restart">Restart game</button>
     </div>
   </body>
 </html>
