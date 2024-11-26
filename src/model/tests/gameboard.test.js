@@ -63,6 +63,8 @@ describe('The gameboard object', () => {
     test('Verify areAllSunk returns false if total ship health > 0', () => {
         const board = gameboard();
         board.placeShip(0, 0, 1, true);
+        board.placeShip(0, 1, 1, true);
+        board.receiveHit(0, 0);
         expect(board.areAllSunk()).toBe(false);
     });
 
@@ -76,6 +78,7 @@ describe('The gameboard object', () => {
     test('Verify getRandomUnhitCoordinate returns a coordinate that is not hit before', () => {
         const board = gameboard();
         // hit every square except (0, 0)
+        board.placeShip(0, 0, 1, true);
         for (let i = 1; i < board.length; i++) {
             for (let j = 0; j < board.length; j++) {
                 board.receiveHit(i, j);

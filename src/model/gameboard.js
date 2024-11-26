@@ -85,12 +85,12 @@ const gameboard = () => {
     };
 
     const areAllSunk = () => {
-        let sunk = false;
         const board = getBoard();
+        let sunk = true;
         board.forEach((row) => {
             row.forEach((cell) => {
-                if (cell.hasShip()) {
-                    sunk = sunk || cell.getShip().getHealth() <= 0;
+                if (cell.hasShip() && cell.getShip().getHealth() > 0) {
+                    sunk = false;
                 }
             });
         });
@@ -171,3 +171,9 @@ const gameboard = () => {
         prettyPrintBoard,
     };
 };
+
+const board = gameboard();
+board.placeShip(0, 0, 1, true);
+board.placeShip(0, 1, 1, true);
+board.receiveHit(0, 0);
+board.areAllSunk();

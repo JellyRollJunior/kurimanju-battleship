@@ -12,6 +12,10 @@ const handleBoardClick = (game) => {
             game.playRound(x, y);
             renderPlayerOneBoard(game.getChallenger().board.getBoard());
             renderPlayerTwoBoard(game.getRival().board.getBoard());
+            if (game.isGameOver()) {
+                const winner = game.getWinner();
+                console.log(`winner is ${winner.name}!`);
+            }
         }
     })
 }

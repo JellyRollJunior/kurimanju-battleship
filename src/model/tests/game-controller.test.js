@@ -40,6 +40,8 @@ describe('The battleship object', () => {
 
     test('Verify isGameOver returns false player if game ongoing', () => {
         const game = gameController();
+        game.getChallenger().board.placeShip(0, 0, 1, true);
+        game.getRival().board.placeShip(0, 0, 1, true);
         expect(game.isGameOver()).toBe(false);
     });
 
