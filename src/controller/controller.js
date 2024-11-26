@@ -55,16 +55,21 @@ const bindBoardData = (game) => {
     rivalBoard.addEventListener('click', handleBoardClick(game));
 };
 
-const init = () => {
-    // init game and place ships
-    const game = gameController('Shisa');
+const bindRestartButton = () => {
+    const restartButton = document.querySelector('#restart');
+    restartButton.addEventListener('click', startNewGame);
+};
+
+const startNewGame = (game) => {
+    game = gameController('Shisa');
     game.getChallenger().board.usePresetShipLayout();
     game.getRival().board.useRandomShipLayout();
-
     renderChallengerBoard(game.getChallenger().board.getBoard());
     renderRivalBoard(game.getRival().board.getBoard());
-    displayPlayerTurn(game.getChallenger());
-
-    // event handlers
     bindBoardData(game);
+};
+
+const init = () => {
+    startNewGame();
+    bindRestartButton();
 };
