@@ -108,6 +108,17 @@ const gameboard = () => {
         return [1, 1];
     };
 
+    const shipSizes = [1, 1, 2, 2, 2, 3, 3, 4];
+    const useRandomShipLayout = () => {
+        shipSizes.forEach((size) => {
+            while (true) {
+                let x = Math.floor(Math.random() * length);
+                let y = Math.floor(Math.random() * length);
+                let vertical = Math.random() < 0.5;
+                if (placeShip(x, y, size, vertical)) break;
+            }
+        })
+    }
     const usePresetShipLayout = () => {
         // Preset layout:
         // =====================
@@ -167,6 +178,7 @@ const gameboard = () => {
         receiveHit,
         areAllSunk,
         getRandomUnhitCoordinate,
+        useRandomShipLayout,
         usePresetShipLayout,
         prettyPrintBoard,
     };

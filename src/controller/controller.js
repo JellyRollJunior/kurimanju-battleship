@@ -43,7 +43,7 @@ const handleBoardClick = (game) => {
                 renderChallengerBoard(game.getChallenger().board.getBoard(), randomAttack[0], randomAttack[1]);
                 enableBoardClick();
             }
-            
+
             displayPlayerTurn(game.getChallenger());
             checkGameOver(game);
         }
@@ -59,7 +59,7 @@ const init = () => {
     // init game and place ships
     const game = gameController('Shisa');
     game.getChallenger().board.usePresetShipLayout();
-    game.getRival().board.usePresetShipLayout();
+    game.getRival().board.useRandomShipLayout();
 
     renderChallengerBoard(game.getChallenger().board.getBoard());
     renderRivalBoard(game.getRival().board.getBoard());
