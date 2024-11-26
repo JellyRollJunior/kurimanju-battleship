@@ -71,7 +71,9 @@ describe('The gameboard object', () => {
     test('Verify areAllSunk returns true if total ship health <= 0', () => {
         const board = gameboard();
         board.placeShip(0, 0, 1, true);
+        board.placeShip(0, 1, 1, true);
         board.receiveHit(0, 0);
+        board.receiveHit(0, 1);
         expect(board.areAllSunk()).toBe(true);
     });
 

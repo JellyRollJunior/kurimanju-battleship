@@ -2,6 +2,13 @@ import { gameController } from '../model/game-controller.js';
 import { renderPlayerOneBoard, renderPlayerTwoBoard } from './../view/view.js';
 export { init };
 
+const computerPlaysRound = (game) => {
+    const randomAttack = game.getChallenger().board.getRandomUnhitCoordinate();
+    game.playRound(randomAttack[0], randomAttack[1]);
+    renderPlayerOneBoard(game.getChallenger().board.getBoard());
+    renderPlayerTwoBoard(game.getRival().board.getBoard());
+}
+
 const handleBoardClick = (game) => {
     const playerOneBoard = document.querySelector('#rival-board');
     playerOneBoard.addEventListener('click', (event) => {
@@ -12,13 +19,18 @@ const handleBoardClick = (game) => {
             game.playRound(x, y);
             renderPlayerOneBoard(game.getChallenger().board.getBoard());
             renderPlayerTwoBoard(game.getRival().board.getBoard());
+
+            // if defending player is challenger and rival is computer, computer attacks
+            while (game.getDefendingPlayer() == game.getChallenger() && game.getRival().isHuman == false) {
+                computerPlaysRound(game);
+            }
             if (game.isGameOver()) {
                 const winner = game.getWinner();
                 console.log(`winner is ${winner.name}!`);
             }
         }
-    })
-}
+    });
+};
 
 const init = () => {
     // init game and place ships
