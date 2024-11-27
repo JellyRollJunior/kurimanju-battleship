@@ -5,9 +5,15 @@
 
 <h1></h1>
 
-### Project for The Odin Project: [Lesson link](https://www.theodinproject.com/lessons/node-path-javascript-battleship)
+### Project for The Odin Project: [Lesson link](https://www.theodinproject.com/lessons/node-path-javascript-battleship) using TDD
 
 ### Features
+- Play battleship against an expertly trained battleship AI (Kurimanju will make random moves)
+- Randomize ship placement for challenger and rival
+- Highlights latest moves
+- Restart
+- Simulated thinking (timeout) while my goat Kurimanju is making a move (he would never think so long irl btw)
+- Cheater button to view my goats board
 
 ### Stack
 
@@ -17,11 +23,16 @@
 - Git / GitHub
 
 ## Learning Outcomes
-
+- First time using Test Driven Development (TDD)
+- Practice using MVC
+- Practicing using pure functions when possible
+- Practice keeping code modular and decoupled
 
 ## Acknowledgements
 
 | Usage    | Source |
 | -------- | ------- |
+| Chiikawa characters | https://chiikawainfo.carrd.co/ |
 
 ## Retrospective (aka yapping)
+First time developing with TDD. I quite enjoy the sense of security I have with the tests. No more self doubt about whether a change will break my existing model or not! I enjoyed the practice in separating model/view/controller as well. I made the separation much less convoluted compared to my todo-list. I also emphasized modularity in this project. I tried my best to decouple my functions from each other and use pure functions where I can.  
